@@ -75,16 +75,25 @@ local function get_node_lvm(pos)
 end
 
 local function add_pos(pos, player)
+<<<<<<< HEAD
 	local lPos = minetest.deserialize(player:get_meta():get("tubelib_forceload_blocks")) or {}
 	if not in_list(lPos, pos) and #lPos < tubelib.max_num_forceload_blocks then
 		lPos[#lPos+1] = pos
 		player:get_meta():set_string("tubelib_forceload_blocks", minetest.serialize(lPos))
+=======
+	local meta = player:get_meta()
+	local lPos = minetest.deserialize(meta:get_string("tubelib_forceload_blocks")) or {}
+	if not in_list(lPos, pos) and #lPos < tubelib.max_num_forceload_blocks then
+		lPos[#lPos+1] = pos
+		meta:set_string("tubelib_forceload_blocks", minetest.serialize(lPos))
+>>>>>>> 96355a2 (Fix deprecation warning issue #120)
 		return true
 	end
 	return false
 end
 
 local function del_pos(pos, player)
+<<<<<<< HEAD
 	local lPos = minetest.deserialize(player:get_meta():get("tubelib_forceload_blocks")) or {}
 	lPos = remove_list_elem(lPos, pos)
 	player:get_meta():set_string("tubelib_forceload_blocks", minetest.serialize(lPos))
@@ -96,11 +105,32 @@ end
 
 local function set_pos_list(player, lPos)
 	player:get_meta():set_string("tubelib_forceload_blocks", minetest.serialize(lPos))
+=======
+	local meta = player:get_meta()
+	local lPos = minetest.deserialize(meta:get_string("tubelib_forceload_blocks")) or {}
+	lPos = remove_list_elem(lPos, pos)
+	meta:set_string("tubelib_forceload_blocks", minetest.serialize(lPos))
+end
+
+local function get_pos_list(player)
+	local meta = player:get_meta()
+	return minetest.deserialize(meta:get_string("tubelib_forceload_blocks")) or {}
+end
+
+local function set_pos_list(player, lPos)
+	local meta = player:get_meta()
+	meta:set_string("tubelib_forceload_blocks", minetest.serialize(lPos))
+>>>>>>> 96355a2 (Fix deprecation warning issue #120)
 end
 
 local function get_data(pos, player)
 	local pos1, pos2 = calc_area(pos)
+<<<<<<< HEAD
 	local num = #minetest.deserialize(player:get_meta():get("tubelib_forceload_blocks")) or 0
+=======
+	local meta = player:get_meta()
+	local num = #minetest.deserialize(meta:get_string("tubelib_forceload_blocks")) or 0
+>>>>>>> 96355a2 (Fix deprecation warning issue #120)
 	local max = tubelib.max_num_forceload_blocks
 	return pos1, pos2, num, max
 end
