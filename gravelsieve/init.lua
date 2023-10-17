@@ -48,14 +48,6 @@ local S = gravelsieve.S
 
 dofile(minetest.get_modpath("gravelsieve") .. "/hammer.lua")
 
---[[local settings_get
-if minetest.setting_get then
-	settings_get = minetest.setting_get
-else
-	settings_get = function(...) return minetest.settings:get(...) end
-end
-]]--
-
 gravelsieve.ore_rarity = tonumber(minetest.settings:get("gravelsieve_ore_rarity")) or 1.16
 gravelsieve.ore_max_elevation = tonumber(minetest.settings:get("gravelsieve_ore_max_elevation")) or 0
 gravelsieve.ore_min_elevation = tonumber(minetest.settings:get("gravelsieve_ore_min_elevation")) or -30912
@@ -473,6 +465,7 @@ for idx = 0,4 do
 	minetest.register_node(node_name..idx, {
 		description = description,
 		tiles = tiles_data,
+		use_texture_alpha = "clip",
 		drawtype = "nodebox",
         drop = node_name,
 
